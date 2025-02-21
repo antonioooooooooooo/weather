@@ -18,6 +18,7 @@ async function fetchCurrentWeather() {
     currentWeather.value = currentWeatherResponse.data;
     fetchingCurrentWeather.value = false;
     isNoMatchingLocationFound.value = false;
+    isMissingCityName.value = false;
   } catch (e) {
     if (e.response.data.error.code === 1006) {
       currentWeather.value = {};
