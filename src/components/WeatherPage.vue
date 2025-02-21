@@ -70,9 +70,7 @@ async function fetchCurrentWeather() {
       <div class="local-time-text">
         <u>Local time</u>:
         {{
-          new Date(
-            currentWeather.location.localtime_epoch * 1000
-          ).toLocaleString("de-DE")
+          new Date(currentWeather.location.localtime).toLocaleString("de-DE")
         }}
       </div>
       <div class="temperature-text">
