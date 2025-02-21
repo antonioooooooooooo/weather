@@ -91,7 +91,7 @@ async function fetchCurrentWeather() {
       </div>
       <div class="wind-text">
         <u>Wind</u>: {{ currentWeather.current.wind_kph }} kph /
-        {{ currentWeather.current.wind_mph }}° mph, <u>Degree</u>:
+        {{ currentWeather.current.wind_mph }} mph, <u>Degree</u>:
         {{ currentWeather.current.wind_degree }}
       </div>
       <div class="humidity-text">
