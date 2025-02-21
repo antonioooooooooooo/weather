@@ -6,6 +6,7 @@ const city = ref("");
 const currentWeather = ref({});
 const fetchingCurrentWeather = ref(false);
 const isNoMatchingLocationFound = ref(false);
+const isMissingCityName = ref(false);
 
 async function fetchCurrentWeather() {
   try {
@@ -18,9 +19,13 @@ async function fetchCurrentWeather() {
     fetchingCurrentWeather.value = false;
     isNoMatchingLocationFound.value = false;
   } catch (e) {
-    console.error(e);
     if (e.response.data.error.code === 1006) {
       isNoMatchingLocationFound.value = true;
+      isMissingCityName.value = false;
+      fetchingCurrentWeather.value = false;
+    } else if (e.response.data.error.code === 1003) {
+      isNoMatchingLocationFound.value = false;
+      isMissingCityName.value = true;
       fetchingCurrentWeather.value = false;
     }
   }
@@ -107,6 +112,9 @@ async function fetchCurrentWeather() {
     </div>
     <div class="no-matching-location-wrapper" v-if="isNoMatchingLocationFound">
       No matching location found, please try another city name.
+    </div>
+    <div class="missing-city-name-wrapper" v-if="isMissingCityName">
+      Missing city name, please input one.
     </div>
   </div>
 </template>
@@ -223,7 +231,8 @@ async function fetchCurrentWeather() {
   font-size: 20px;
   margin-top: 40px;
 }
-.no-matching-location-wrapper {
+.no-matching-location-wrapper,
+.missing-city-name-wrapper {
   margin-top: 40px;
   font-size: 20px;
   font-weight: 600;
