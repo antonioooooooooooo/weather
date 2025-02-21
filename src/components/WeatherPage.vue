@@ -11,14 +11,14 @@ async function fetchCurrentWeather() {
   try {
     fetchingCurrentWeather.value = true;
     const currentWeatherResponse = await axios.get(
-      `http://api.weatherapi.com/v1/current.json?key=511c1a9099544abd96b184841252102&q=${city.value}&aqi=no`
+      `https://api.weatherapi.com/v1/current.json?key=511c1a9099544abd96b184841252102&q=${city.value}&aqi=no`
     );
 
     currentWeather.value = currentWeatherResponse.data;
     fetchingCurrentWeather.value = false;
     isNoMatchingLocationFound.value = false;
   } catch (e) {
-    console.error(e.response.data.error);
+    console.error(e);
     if (e.response.data.error.code === 1006) {
       isNoMatchingLocationFound.value = true;
       fetchingCurrentWeather.value = false;
